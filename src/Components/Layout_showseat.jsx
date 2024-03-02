@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 class Layout_showseat extends Component {
   render() {
     return (
-      <div className='flex flex-row  justify-center  gap-x-20 p-0  w-screen h-full bg-background_theatre  bg-cover bg-no-repeat bg-center pb-4   '>
+      <div className='flex flex-row  justify-center  gap-x-20 p-0  w-screen h-full bg-background_theatre  bg-cover bg-no-repeat bg-center pb-36   '>
         <div className='flex flex-col pt-6 '>
           <h1 className='text-3xl text-orange-500 font-bold'>BOOK MOVIE TICKET AT MINH THANH SHOP</h1>
           <p className='text-center text-white mb-0 '>screen</p>
@@ -100,17 +101,17 @@ class Layout_showseat extends Component {
                 <tr>
                   <td className="border border-gray-300 p-2 text-amber-300 font-bold text-center">A1</td>
                   <td className="border border-gray-300 p-2 text-amber-300 font-bold text-center">2000</td>
-                  <td className="border border-gray-300 p-2 text-red-700 font-bold text-center">X</td>
+                  <td className="border border-gray-300 p-2 text-red-700 font-bold text-center cursor-pointer">X</td>
                 </tr>
                 <tr>
                   <td className="border border-gray-300 p-2 text-amber-300 font-bold text-center">E1</td>
                   <td className="border border-gray-300 p-2 text-amber-300 font-bold text-center">2000</td>
-                  <td className="border border-gray-300 p-2 text-red-700 font-bold text-center">X</td>
+                  <td className="border border-gray-300 p-2 text-red-700 font-bold text-center cursor-pointer">X</td>
                 </tr>
                 <tr>
                   <td className="border border-gray-300 p-2 text-amber-300 font-bold text-center">F1</td>
                   <td className="border border-gray-300 p-2 text-amber-300 font-bold text-center">5000</td>
-                  <td className="border border-gray-300 p-2 text-red-700 font-bold text-center">X</td>
+                  <td className="border border-gray-300 p-2 text-red-700 font-bold text-center cursor-pointer">X</td>
                 </tr>
 
                 <tr>
@@ -122,6 +123,8 @@ class Layout_showseat extends Component {
             </table>
 
           </div>
+
+          <Link to="/" className='text-center rounded-lg p-2 my-2  bg-lime-600 hover:bg-lime-400 outline-1 '>Home</Link>
 
         </div>
       </div>
