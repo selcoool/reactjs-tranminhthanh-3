@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 export default class Layout_seat extends Component {
   render() {
     return (
@@ -43,25 +44,26 @@ export default class Layout_seat extends Component {
             <div className='text-white font-bold w-10 h-10  flex justify-center items-center'>3</div>
             <div className='text-white font-bold w-10 h-10  flex justify-center items-center'>4</div>
             <div className="text-white font-bold flex justify-center items-center">A</div>
-            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center seat-empty">A1</div>
-            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center seat-reserved">A2</div>
-            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center seat-empty">A3</div>
-            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center seat-empty">A4</div>
-            <div className="text-white font-bold flex justify-center items-center">B</div>
-            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center seat-empty">B1</div>
-            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center seat-empty">B2</div>
-            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center seat-empty">B3</div>
-            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center seat-empty">B4</div>
+            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center cursor-pointer seat-empty">A1</div>
+            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center cursor-pointer seat-reserved">A2</div>
+            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center cursor-pointer seat-empty">A3</div>
+            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center cursor-pointer seat-empty">A4</div>
+            <div className="text-white font-bold flex justify-center items-center">B</div> 
+            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center cursor-pointer seat-empty">B1</div>
+            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center cursor-pointer seat-empty">B2</div>
+            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center cursor-pointer seat-empty">B3</div>
+            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center cursor-pointer seat-empty">B4</div>
             <div className="text-white font-bold flex justify-center items-center">C</div>
-            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center seat-empty">C1</div>
-            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center seat-empty">C2</div>
-            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center seat-empty">C3</div>
-            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center seat-empty">C4</div>
+            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center cursor-pointer seat-empty">C1</div>
+            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center cursor-pointer seat-empty">C2</div>
+            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center cursor-pointer seat-empty">C3</div>
+            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center cursor-pointer seat-empty">C4</div>
           </div>
 
           <div className='bg-amber-600 text-4xl py-2 mt-2 px-40'>SCREEN THIS WAY</div>
           <div className='flex justify-center items-center'>
-            <div className='rounded-lg p-2 my-2 bg-white '>Confirm Selection</div>
+          <Link to="/showseat" className='rounded-lg p-2 my-2 bg-white '>Confirm Selection</Link>
+        
           </div>
           <div className='bg-orange-900 h-5  mb-4 w-full '></div>
           <div className='w-full'>

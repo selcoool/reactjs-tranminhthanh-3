@@ -1,12 +1,23 @@
 import './App.css';
-import Theatre from './Components/Theatre';
-
+import Layout_seat from './Components/Layout_seat';
+import Layout_showseat from './Components/Layout_showseat';
+import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 
 function App() {
   return (
-    <div >
-      <Theatre />
-    </div>
+    <Router>
+ 
+    <Routes>
+    
+    <Route path='/' element={<Layout_seat/>}/>
+    <Route path='/showseat' element={<Layout_showseat/>}/>
+ 
+    {/* <Route path='/api' element={<Api/>}/> */}
+
+
+ 
+    </Routes>
+    </Router>
   );
 }
 
