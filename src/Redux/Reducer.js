@@ -1,6 +1,8 @@
 // import { FAIL_REQUEST, GET_USER_LIST, MAKE_REQUEST } from "./ActionType"
+import { DELETE_SEAT,ADD_SEAT,GET_SEATLIST,SELECTED_SEAT,RESERVED_SEAT } from "./constant"
 
 let initialstate={
+    
     seatList:[ 
         {
         "hang": "", 
@@ -186,32 +188,40 @@ let initialstate={
     
     ],
     selectedList:[],
-    loading:false,
-    message:''
+    reservedList:[],
+ 
 }
 
 export let todoReducer =(state=initialstate,action)=>{
-    switch(action.type){
-        case 'todoReducer/getSeatList':
-            return {
-                ...state,
-                loading:true
-            }
-        // case FAIL_REQUEST:
-        //     return {
-        //         ...state,
-        //         loading:false,
-        //         message:action.payload
+  switch(action.type){
+      case GET_SEATLIST:
+        return {...state, message: ''}
+      case ADD_SEAT:
+        if(action.payload.gia !== 0 && action.payload.daDat !== true){
 
-        //     }
-        // case GET_USER_LIST:
-        //     return {
-        //         ...state,
-        //         loading:false,
-        //         seatList:action.payload,
-        //         message:''
+          const reservedSeats =[...state.selectedList, action.payload].map((seat) => {
+            return seat.daDat === false ? { ...seat, daDat: true } : seat;
+          });
 
-        //     }
-        default:return state
-    }
+          return {
+            ...state,
+            selectedList: reservedSeats
+          };
+        }
+        break;
+
+      case RESERVED_SEAT:
+
+        
+          state.reservedList= [action.payload]
+          return {
+            ...state
+          };
+      
+        
+        break;
+       
+      default:
+        return state;
+  }
 }

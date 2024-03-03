@@ -1,26 +1,62 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux';
+import React, { Component, Fragment } from 'react'
+import { connect} from 'react-redux';
 import { Link } from 'react-router-dom'
+import { addSeat, reservedSeat } from '../Redux/action';
  class Layout_seat extends Component {
 
+  state = {
+    name:'',
+    no_seat:0,
+    seatList:[]
+      
+  };
+
+
+  handle_getUser=(e)=>{
+    let {value,name}=e.target;
+
+    this.setState({[name]:value})
+  }
+
+
+  handle_selectedSeat=()=>{
+    const infor={
+      name: this.state.name,
+      no_seat:this.state.no_seat,
+      seatList:this.props.selectedList
+    }
+    this.props.handle_ReservedSeat(infor)
+    // console.log('dddddddddddddddddddd',infor)
+    
+  }
+  
   render() {
+
+  // console.log('name',this.state.name)
+  // console.log('no_seat',this.state.no_seat)
    
     return (
-        <div className='flex items-center flex-col w-screen h-full bg-background_theatre bg-cover bg-no-repeat bg-center  '>
+        <div className='flex items-center flex-col w-screen h-full bg-background_theatre bg-cover bg-no-repeat bg-center pb-36  '>
         <div className='px-4 bg-slate-500/70 py-2'>
           <p className='text-yellow-400 py-2'>Fill fields below and select your seat</p>
+
+          
+         
           <div className='flex gap-4'>
             <div className='flex-1'>
               <p>Name<span className='text-red-500 pl-1'>*</span></p>
-              <input type='text' className='border-white outline-none px-4 py-2' placeholder='Put your name' />
+              <input type='text' onChange={this.handle_getUser} name="name" className='border-white outline-none px-4 py-2' placeholder='Put your name' />
             </div>
             <div className='flex-1'>
               <p>Number of Seats <span className='text-red-500 pl-1'>*</span></p>
-              <input type='number' className='border-white outline-none px-4 py-2' placeholder='Put your seat' />
+              <input type='number' onChange={this.handle_getUser} name="no_seat"  className='border-white outline-none px-4 py-2' placeholder='Put your seat' />
             </div>
           </div>
+          {this.props.messenger && (
+                  <p className='text-red-500 py-2'>{this.props.messenger}</p>
+          )} 
           <div className='flex'>
-            <div className='rounded-lg p-2 my-2 bg-white '>Start selecting</div>
+            <div className='rounded-lg p-2 my-2 bg-white ' onClick={()=>this.handle_selectedSeat()}>Start selecting</div>
           </div>
           <div className='flex gap-4'>
             <div className='flex justify-center items-center gap-2'>
@@ -51,6 +87,8 @@ import { Link } from 'react-router-dom'
           const isSeatExcluded = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].includes(parseInt(seat.soGhe));
           return (
             <div
+
+            onClick={()=>this.props.handle_AddSeat(seat)}
               key={seatIndex}
               className={`${
                 isSeatExcluded 
@@ -68,65 +106,6 @@ import { Link } from 'react-router-dom'
 </div>
 
 
-
-
-
-{/* <div className="grid grid-cols-13 gap-y-4 gap-x-0">
-  {this.props.seatList.map((seats, index) => {
-    return (
-      <div className="flex" key={index}>
-        <div className='text-white font-bold w-10 h-10  flex justify-center items-center'>{seats.hang}</div>
-        {(() => {
-          const elements = [];
-          for (let seatIndex = 0; seatIndex < seats.danhSachGhe.length; seatIndex++) {
-            const seat = seats.danhSachGhe[seatIndex];
-            elements.push(
-              <div
-                key={seatIndex}
-                className={`border border-orange-500 w-10 h-10 flex justify-center items-center cursor-pointer seat-empty gap-1`}
-              >
-                {seat.soGhe}
-              </div>
-            );
-          }
-          return elements;
-        })()}
-      </div>
-    );
-  })}
-</div> */}
-
-
-
-
-
-
-
-
-          {/* <div className="grid grid-cols-5 gap-y-4 gap-x-0">
-             
-            <div className='text-white font-bold w-10 h-10  flex justify-center items-center'></div>
-            <div className='text-white font-bold w-10 h-10  flex justify-center items-center'>1</div>
-            <div className='text-white font-bold w-10 h-10  flex justify-center items-center'>2</div>
-            <div className='text-white font-bold w-10 h-10  flex justify-center items-center'>3</div>
-            <div className='text-white font-bold w-10 h-10  flex justify-center items-center'>4</div>
-            <div className="text-white font-bold flex justify-center items-center">A</div>
-            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center cursor-pointer seat-empty">A1</div>
-            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center cursor-pointer seat-reserved">A2</div>
-            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center cursor-pointer seat-empty">A3</div>
-            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center cursor-pointer seat-empty">A4</div>
-            <div className="text-white font-bold flex justify-center items-center">B</div> 
-            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center cursor-pointer seat-empty">B1</div>
-            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center cursor-pointer seat-empty">B2</div>
-            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center cursor-pointer seat-empty">B3</div>
-            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center cursor-pointer seat-empty">B4</div>
-            <div className="text-white font-bold flex justify-center items-center">C</div>
-            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center cursor-pointer seat-empty">C1</div>
-            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center cursor-pointer seat-empty">C2</div>
-            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center cursor-pointer seat-empty">C3</div>
-            <div className="border border-orange-500 w-10 h-10 flex justify-center items-center cursor-pointer seat-empty">C4</div>
-          </div> */}
-
           <div className='bg-amber-600 text-4xl py-2 mt-2 px-40'>SCREEN THIS WAY</div>
           <div className='flex justify-center items-center'>
           <Link to="/showseat" className='rounded-lg p-2 my-2 bg-white hover:bg-lime-600 '>Confirm Selection</Link>
@@ -143,22 +122,35 @@ import { Link } from 'react-router-dom'
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td className="border border-gray-300 p-2 text-center">Kha1</td>
-                  <td className="border border-gray-300 p-2 text-center">2</td>
-                  <td className="border border-gray-300 p-2 text-center">A 1, A 3</td>
-                </tr>
-                <tr>
-                  <td className="border border-gray-300 p-2 text-center">Kha1</td>
-                  <td className="border border-gray-300 p-2 text-center">2</td>
-                  <td className="border border-gray-300 p-2 text-center">A 1, A 3</td>
-                </tr>
+              <tr>
+                {/* {this.props?.reservedList && this.props?.reservedList.map((reservedSeat,index)=>{
+                  
+                  <Fragment key={index}>
+                    {console.log('pppppppxx',reservedSeat)} */}
 
-                <tr>
-                  <td className="border border-gray-300 p-2 text-center">Kha1</td>
-                  <td className="border border-gray-300 p-2 text-center">2</td>
-                  <td className="border border-gray-300 p-2 text-center">A 1, A 3</td>
+               
+
+                  {this.props.reservedList.map((reservedSeat,index)=>{
+                    return (
+                      <Fragment key={index}>
+                      <td className="border border-gray-300 p-2 text-center">{reservedSeat.name}</td>
+                      <td className="border border-gray-300 p-2 text-center">{reservedSeat.no_seat}</td>
+                      <td className="border border-gray-300 p-2 text-center">
+                      {reservedSeat.seatList.map((position,index2)=>{
+                      return <Fragment key={index2}>{position.soGhe},</Fragment>
+                    })}
+                        </td>
+                      </Fragment>
+                    )
+              
+                  
+                   
+                  })}
+                    
+                       
+              
                 </tr>
+               
               </tbody>
             </table>
           </div>
@@ -170,10 +162,26 @@ import { Link } from 'react-router-dom'
 
 let mapStateToProps=(state)=>{
   return {
-    seatList:state.seatList
+    seatList:state.seatList,
+    selectedList:state.selectedList,
+    reservedList:state.reservedList,
+   
+  }
+}
+
+let mapDispatchToProps=(dispatch)=>{
+  return {
+    handle_AddSeat:(seat)=>{
+      dispatch(addSeat(seat))
+    }
+    ,
+    handle_ReservedSeat:(reservedseat)=>{
+      dispatch(reservedSeat(reservedseat))
+    }
   }
 }
 
 
 
-export default connect(mapStateToProps)(Layout_seat);
+
+export default connect(mapStateToProps,mapDispatchToProps)(Layout_seat);
